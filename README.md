@@ -21,12 +21,4 @@ conda install -c fastai fastdoc
 
 ## How to use
 
-Suppose your notebook is in a folder called `book`. To run fastdoc:
-
-`fastdoc_convert_all --path book --dest_path convert_book` 
-
-You'll find your exported asciidoc files and all images used in `convert_book`. 
-
-For a single notebook demonstrating all the features of `fastdoc`, see the `test/_test.ipynb` notebook. 
-
-For a complete O'Reilly book written in this way, see [fastbook](https://github.com/fastai/fastbook/).
+Create notebooks in a folder called `book`. From that folder, run `fastdoc_convert_all` in your terminal. You'll find your exported asciidoc files and all images used in `../convert_book`. For a single notebook demonstrating all the features of `fastdoc`, see the `test/_test.ipynb` notebook. For a complete O'Reilly book written in this way, see [fastbook](https://github.com/fastai/fastbook/).
