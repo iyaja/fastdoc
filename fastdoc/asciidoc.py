@@ -14,6 +14,7 @@ __all__ = ['markdown_cell', 'code_cell', 'remove_hidden_cells', 'isolate_adoc_bl
 # Cell
 from .imports import *
 from fastcore.script import *
+from warnings import warn
 
 # Cell
 def markdown_cell(md):
@@ -181,8 +182,7 @@ CODE_MAX_LEN = 80
 def check_code_len(cell):
     lines = cell['source'].split('\n')
     for l in lines:
-        if len(l) > CODE_MAX_LEN:
-            raise Exception(f"Found code too long in a cell:\n{cell['source']}")
+        if len(l) > CODE_MAX_LEN: warn(f"Found code too long in a cell:\n{cell['source']}")
     return cell
 
 # Cell
@@ -246,7 +246,7 @@ def replace_jekylls(cell):
             return f'```asciidoc\n.{title}\n[{surro}]\n====\n{text}\n====\n```\n'
         elif len(name) != 0: return f"```asciidoc\n[{name}]\n====\n{text}\n====\n```\n"
         else:              return f"```asciidoc\n____\n{text}\n____\n```\n"
-    if _re_forgot_column.search(cell["source"]): raise Exception("Found a non-processed block quote, please fix")
+    if _re_forgot_column.search(cell["source"]): warn("Found a non-processed block quote, please fix")
     cell["source"] = _re_block_notes.sub(_rep, cell["source"])
     return cell
 
@@ -524,6 +524,8 @@ def fastdoc_convert_all(
     path:Param("Path to notebooks",str)='book',
     dest_path:Param("Path to generated asciidoc files",str)='../convert_book'):
     path,dest_path = Path(path),Path(dest_path)
+    dest_path.mkdir(parents=True,exist_ok=True)
+    (path/'images').mkdir(parents=True,exist_ok=True)
     nbs = [f for f in path.iterdir() if f.suffix == '.ipynb' and not f.name.startswith('_')]
     parallel(_convert1, nbs, dest_path=dest_path)
     for f in path.iterdir():

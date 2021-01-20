@@ -1,3 +1,4 @@
+
 # fastdoc
 > Create publication-quality books from Jupyter notebooks
 
@@ -6,7 +7,17 @@ The output of `fastdoc` is an [asciidoc](https://asciidoc.org/) file for each in
 
 ## Install
 
-`pip install fastdoc` or `conda install fastdoc`
+To install using pip:
+
+```bash
+pip install fastdoc
+```
+
+To install using Conda:
+
+```bash
+conda install -c fastai fastdoc
+```
 
 ## How to use
 
